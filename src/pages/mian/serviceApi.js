@@ -22,12 +22,12 @@ export default {
       redirect: "follow",
     };
 
-    return fetch("/activiti/deleteDeploymentById", requestOptions)
-      .then((response) => response.json())
+    return fetch(
+      "/activiti/deleteDeploymentById",
+      requestOptions
+    ).then((response) => response.json());
   },
-  addDeployment: ({
-    name, bpmnXml
-  }) => {
+  addDeployment: ({ name, bpmnXml }) => {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -40,7 +40,25 @@ export default {
       redirect: "follow",
     };
 
-    return fetch("/activiti/addDeployment", requestOptions)
-      .then((response) => response.json())
-  }
+    return fetch("/activiti/addDeployment", requestOptions).then((response) =>
+      response.json()
+    );
+  },
+  startProcessInstance: ({ processDefinitionId, businessKey, context }) => {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = JSON.stringify({ processDefinitionId, businessKey, context });
+
+    let requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    return fetch("/activiti/startProcessInstance", requestOptions).then((response) =>
+      response.json()
+    );
+  },
 };
