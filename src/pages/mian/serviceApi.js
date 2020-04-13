@@ -1,3 +1,9 @@
+function myFetch(...param) {
+  return fetch(...param)
+    .then(response => response.text())
+    .then(text => JSON.parse(text))
+    .catch(console.error);
+}
 export default {
   queryDeployment: () => {
     let requestOptions = {
@@ -5,9 +11,7 @@ export default {
       redirect: "follow",
     };
 
-    return fetch("/activiti/queryDeployment", requestOptions).then((response) =>
-      response.json()
-    );
+    return myFetch("/activiti/queryDeployment", requestOptions);
   },
   deleteDeploymentById: (id) => {
     let myHeaders = new Headers();
@@ -22,10 +26,7 @@ export default {
       redirect: "follow",
     };
 
-    return fetch(
-      "/activiti/deleteDeploymentById",
-      requestOptions
-    ).then((response) => response.json());
+    return myFetch("/activiti/deleteDeploymentById", requestOptions);
   },
   addDeployment: ({ name, bpmnXml }) => {
     let myHeaders = new Headers();
@@ -40,9 +41,7 @@ export default {
       redirect: "follow",
     };
 
-    return fetch("/activiti/addDeployment", requestOptions).then((response) =>
-      response.json()
-    );
+    return myFetch("/activiti/addDeployment", requestOptions);
   },
   startProcessInstance: ({ processDefinitionId, businessKey, context }) => {
     let myHeaders = new Headers();
@@ -57,8 +56,6 @@ export default {
       redirect: "follow",
     };
 
-    return fetch("/activiti/startProcessInstance", requestOptions).then((response) =>
-      response.json()
-    );
+    return myFetch("/activiti/startProcessInstance", requestOptions);
   },
 };
