@@ -44,26 +44,26 @@ export default () => {
   ];
   const addDialogRef = useRef(null);
   const startProcessDialogRef = useRef(null);
-  const [deploymentList, setDeploymentList] = useState([]);
+  const [processDefinitionList, setProcessDefinitionList] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(init, []);
   function init() {
-    getDeploymentList();
+    getProcessDefinitionList();
   }
   async function deleteDeployment({ id }, isOver) {
     try {
       await serveceApi.deleteDeploymentById(id);
       message.success("删除成功");
-      getDeploymentList();
+      getProcessDefinitionList();
     } finally {
       isOver();
     }
   }
-  async function getDeploymentList() {
+  async function getProcessDefinitionList() {
     setLoading(true);
     try {
-      let result = await serveceApi.queryDeployment();
-      setDeploymentList(result);
+      let result = await serveceApi.queryProcessDefinition();
+      setProcessDefinitionList(result);
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,7 @@ export default () => {
       await serveceApi.addDeployment(data);
       message.success("新增成功");
       isOk(true);
-      getDeploymentList();
+      getProcessDefinitionList();
     } catch (error) {
       console.error(error);
       message.error("新增失败");
@@ -91,7 +91,7 @@ export default () => {
       await serveceApi.startProcessInstance(data);
       message.success("发布成功");
       isOk(true);
-      getDeploymentList();
+      getProcessDefinitionList();
     } catch (error) {
       console.error(error);
       message.error("发布失败");
@@ -106,7 +106,7 @@ export default () => {
       </Button>
       <AddDeployDialog ref={addDialogRef} onSubmit={addDeployment} />
       <StartProcessDialog ref={startProcessDialogRef} onSubmit={startProcess} />
-      <Table columns={columns} dataSource={deploymentList} loading={loading} />
+      <Table columns={columns} dataSource={processDefinitionList} loading={loading} />
     </div>
   );
 };

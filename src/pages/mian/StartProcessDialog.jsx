@@ -16,7 +16,7 @@ export default forwardRef((props, ref) => {
     setVisible(true);
   }
   function submit(data) {
-    let {context, businessKey} = data;
+    let {context} = data;
     if(context != null) {
       try {
         context = JSON.parse(context);
@@ -27,7 +27,7 @@ export default forwardRef((props, ref) => {
       }
     }
     setLoading(true);
-    props.onSubmit({ ...data, processDefinitionId }, (success) => {
+    props.onSubmit({ ...data, context, processDefinitionId }, (success) => {
       setLoading(false);
       setVisible(!success);
     });
