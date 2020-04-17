@@ -100,8 +100,8 @@ export default () => {
   }
 
   return (
-    <div>
-      <Button type="primary" onClick={showAddDeploymentDialog}>
+    <div style={{marginLeft: 10, marginRight: 10}}>
+      <Button type="primary" onClick={showAddDeploymentDialog} style={{margin: 10, marginLeft: 0}}>
         新增
       </Button>
       <AddDeployDialog ref={addDialogRef} onSubmit={addDeployment} />
