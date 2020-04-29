@@ -1,8 +1,16 @@
+import { message } from 'antd';
+
 function myFetch(...param) {
   return fetch(...param)
-    .then(response => response.text())
+    .then(response => {
+      if(!response.ok) {
+        console.error(response);
+        throw response.statusText;
+      }
+      return response.text();
+    })
     .then(text => JSON.parse(text))
-    .catch(console.error);
+    .catch(e => {console.error(e); message.error(e + "")});
 }
 export default {
   queryProcessDefinition: () => {
