@@ -1,13 +1,13 @@
 import myFetch from '../../utils/request';
 
 export default {
-  queryDeployment: () => {
+  queryProcessDefinition: () => {
     let requestOptions = {
       method: "GET",
       redirect: "follow",
     };
 
-    return myFetch("/activiti/queryDeployment", requestOptions);
+    return myFetch("/activiti/queryProcessDefinition", requestOptions);
   },
   deleteDeploymentById: (id) => {
     let myHeaders = new Headers();
