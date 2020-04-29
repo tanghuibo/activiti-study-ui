@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
 import { Layout, Menu } from "antd";
-import createHistory from 'history/createHashHistory';
+import createHistory from "history/createHashHistory";
 
 import { HashRouter as Router, Route } from "react-router-dom";
 import Department from "./pages/deployment/index";
+import ProcessDefinition from "./pages/ProcessDefinition/index";
 
 const { Header, Content, Footer, Sider } = Layout;
 const history = createHistory();
@@ -23,13 +24,28 @@ export default () => (
         }}
       >
         <div className="logo">activiti study</div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]} style={{height: 'calc(100vh - 100px)'}}>
-          <Menu.Item key="deploymentView" onClick={() => {history.push("/deploymentView")}}>
-            <span className="nav-text">
-              流程实例
-            </span>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["4"]}
+          style={{ height: "calc(100vh - 100px)" }}
+        >
+          <Menu.Item
+            key="deploymentView"
+            onClick={() => {
+              history.push("/deploymentView");
+            }}
+          >
+            <span className="nav-text">流程部署</span>
           </Menu.Item>
-          
+          <Menu.Item
+            key="processDefinitionView"
+            onClick={() => {
+              history.push("/processDefinitionView");
+            }}
+          >
+            <span className="nav-text">流程定义</span>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
@@ -40,16 +56,22 @@ export default () => (
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             className="site-layout-background"
-            style={{ padding: 24, minHeight: 360, height: "calc(100vh - 160px)" }}
+            style={{
+              padding: 24,
+              minHeight: 360,
+              height: "calc(100vh - 160px)",
+            }}
           >
             <Router>
-            <Route path="/deploymentView" component={Department}/>
+              <Route
+                path="/processDefinitionView"
+                component={ProcessDefinition}
+              />
+              <Route path="/deploymentView" component={Department} />
             </Router>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          create by tanghuibo
-        </Footer>
+        <Footer style={{ textAlign: "center" }}>create by tanghuibo</Footer>
       </Layout>
     </Layout>
   </div>
