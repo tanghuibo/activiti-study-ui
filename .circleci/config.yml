@@ -16,7 +16,9 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "java -version"
+          command: >
+            java -version
+            mvn -version
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
